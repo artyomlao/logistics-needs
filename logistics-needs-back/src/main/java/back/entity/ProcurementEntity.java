@@ -1,13 +1,13 @@
 package back.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "procurement")
@@ -41,4 +41,10 @@ public class ProcurementEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore
     private UserEntity user;
+
+    @OneToMany(mappedBy = "procurement")
+    private List<DocumentEntity> documents;
+
+    @OneToMany(mappedBy = "procurement")
+    private List<ProviderEntity> providers;
 }

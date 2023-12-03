@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import ajax from "../Services/fetchService";
 import { useLocalState } from "../util/useLocalStorage";
 
-const Dashboard = () => {
-  const [jwt, setJwt] = useLocalState("", "jwt");
+const AdminDashboard = () => {
+    const [jwt, setJwt] = useLocalState("", "jwt");
 
-  const [procurement, setProcurement] = useState(null);
-
-  useEffect(() => {
-    ajax("api/procurement", "GET", jwt).then((procurementData) => {
-      console.log(procurementData);
-      setProcurement(procurementData);
-    });
-  }, [jwt]);
-
-  function createProcurement() {
-    ajax("/api/procurement", "POST", jwt).then((procurement) => {
-      window.location.href = '/procurement/${procurement.id}'
-    })
-  }
+    const [procurement, setProcurement] = useState(null);
+  
+    useEffect(() => {
+      ajax("api/procurement", "GET", jwt).then((procurementData) => {
+        console.log(procurementData);
+        setProcurement(procurementData);
+      });
+    }, [jwt]);
+  
+    function createProcurement() {
+      ajax("/api/procurement", "POST", jwt).then((procurement) => {
+        window.location.href = '/procurement/${procurement.id}'
+      })
+    }
   return (
-    <div style={{ margin: "2em" }}>
+    <Container>
       <Row>
         <Col>
           <div
@@ -36,14 +36,19 @@ const Dashboard = () => {
           </div>
         </Col>
       </Row>
+      <Row>
+        <Col>
+          <div className="h1">Admin Dashboard</div>
+        </Col>
+      </Row>
       {procurement ? (
         <div
-        className="d-grid gap-5"
-        style={{ gridTemplateColumns: "repeat(auto-fit, 18rem)" }}
-      >
-        {procurement.map((procurementData) => (
-          // <Col>
-          <Card
+          className="d-grid gap-5"
+          style={{ gridTemplateColumns: "repeat(auto-fit, 18rem)" }}
+        >
+          {procurement.map((procurementData) => (
+            // <Col>
+            <Card
             key={procurementData.id}
             style={{ width: "20rem", height: "18rem" }}
           >
@@ -77,14 +82,14 @@ const Dashboard = () => {
               </Button>
             </Card.Body>
           </Card>
-          // </Col>
-        ))}
-      </div>
+            // </Col>
+          ))}
+        </div>
       ) : (
         <></>
       )}
-    </div>
+    </Container>
   );
 };
 
-export default Dashboard;
+export default AdminDashboard;

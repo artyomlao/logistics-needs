@@ -1,5 +1,6 @@
 package back.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,5 +24,6 @@ public class DocumentEntity {
 
     @ManyToOne
     @JoinColumn(referencedColumnName = "id", name = "procurement_id", insertable = false, updatable = false)
+    @JsonIgnore
     private ProcurementEntity procurement;
 }

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import ajax from "../Services/fetchService";
 import { useLocalState } from "../util/useLocalStorage";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [jwt, setJwt] = useLocalState("", "jwt");
 
   const [procurement, setProcurement] = useState(null);
@@ -16,8 +18,8 @@ const Dashboard = () => {
   }, [jwt]);
 
   function createProcurement() {
-    ajax("/api/procurement", "POST", jwt).then((procurement) => {
-      window.location.href = '/procurement/${procurement.id}'
+    ajax("/api/procurement", "POST", jwt).then((procurementData) => {
+      navigate(`/procurement/${procurementData.id}`);
     })
   }
   return (
@@ -36,6 +38,11 @@ const Dashboard = () => {
           </div>
         </Col>
       </Row>
+      <div className="mb-5">
+        <Button size="lg" onClick={() => createProcurement()}>
+          Submit New Procurement
+        </Button>
+      </div>
       {procurement ? (
         <div
         className="d-grid gap-5"

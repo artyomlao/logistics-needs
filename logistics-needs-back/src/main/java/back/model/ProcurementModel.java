@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,6 +19,7 @@ public class ProcurementModel {
     private Long quantity;
     private Double price;
     private LocalDateTime purchaseTime;
+    private List<String> documents;
     private Long userId;
 }
 

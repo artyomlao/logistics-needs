@@ -11,6 +11,7 @@ import {
   Row,
 } from "react-bootstrap";
 import ajax from "../Services/fetchService";
+import CreatableSelect from 'react-select/creatable';
 
 import { useLocalState } from "../util/useLocalStorage";
 
@@ -24,6 +25,9 @@ const ProcurementView = () => {
     quantity: 0,
     userId: 1
   });
+
+  const [options, setOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
   
   const prevProcurementValue = useRef(procurement);
 
@@ -34,9 +38,11 @@ const ProcurementView = () => {
   }
 
   function save() {
+    procurement.documents = selectedOptions.map(documentData => documentData.value);
     ajax(`/api/procurement/${procurementId}`, "PUT", jwt, procurement).then(
       (procurementData) => {
         setProcurement(procurementData);
+        window.location.href = '/dashboard'
       });
   }
 
@@ -47,9 +53,26 @@ const ProcurementView = () => {
         if (procurementData.description === null) procurementData.description = "";
         if (procurementData.price === null) procurementData.description = 0;
         if (procurementData.quantity === null) procurementData.quantity = 0;
+        const options = procurementData.documents.map((document) => ({
+          value: document.name,
+          label: document.name
+        }))
+        setOptions(options);
+        setSelectedOptions(options);
         setProcurement(procurementData);
       });
   }, []);
+
+  const handleCreate = (inputValue) => {
+    const newOption = {
+      value: inputValue,
+      label: inputValue,
+    };
+    
+    setOptions([...options, newOption]);
+    setSelectedOptions([...options, newOption]);
+  };
+
   return (
     <Container className="mt-5">
       <Row className="d-flex align-items-center">
@@ -134,6 +157,21 @@ const ProcurementView = () => {
                 type="number"
                 value={procurement.quantity}
                 placeholder="3"
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} className="my-3" controlId="formPlaintextEmail">
+            <Form.Label column sm="3" md="2">
+              Documents:
+            </Form.Label>
+            <Col sm="9" md="8" lg="6">
+              <CreatableSelect
+                id="documents"
+                options={options}
+                isMulti
+                onCreateOption={handleCreate}
+                value={selectedOptions}
               />
             </Col>
           </Form.Group>

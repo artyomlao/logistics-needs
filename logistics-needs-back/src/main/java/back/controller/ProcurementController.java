@@ -5,6 +5,8 @@ import back.model.ProcurementModel;
 import back.service.ProcurementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +24,8 @@ public class ProcurementController {
     }
 
     @PostMapping
-    public ResponseEntity<ProcurementEntity> insert(final @RequestBody ProcurementModel model) {
-        return ResponseEntity.ok(procurementService.insertProcurement(model));
+    public ResponseEntity<ProcurementEntity> insert(final @AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(procurementService.insertProcurement(user));
     }
 
     @GetMapping

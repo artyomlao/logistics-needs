@@ -17,7 +17,6 @@ function ajax(url, requestMethod, jwt, requestBody) {
     return fetch(url, fetchData).then((response) => {
       if (response.status === 200) {
         const body = response.json();
-        console.log(body);
         return body;
       }
     });

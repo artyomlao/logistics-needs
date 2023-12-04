@@ -16,7 +16,8 @@ import java.util.List;
 public class ProcurementEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "procurement_generator")
+    @SequenceGenerator(name = "procurement_generator", sequenceName = "procurement_sq", allocationSize = 1)
     private Long id;
 
     @Column

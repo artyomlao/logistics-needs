@@ -18,7 +18,6 @@ function App() {
   function getRolesFromJWT() {
     if (jwt) {
       const decodedJwt = jwtDecode(jwt);
-      console.log(decodedJwt);
       return decodedJwt.role;
     }
     return [];

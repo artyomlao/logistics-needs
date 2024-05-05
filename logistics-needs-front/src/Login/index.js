@@ -85,6 +85,16 @@ const Login = () => {
               type="button"
               size="lg"
               onClick={() => {
+                window.location.href = "/registration";
+              }}
+            >
+              Registration
+            </Button>
+            <Button
+              type="button"
+              size="lg"
+              className="btn-primary"
+              onClick={() => {
                 window.location.href = "/";
               }}
             >

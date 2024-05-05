@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -38,5 +39,9 @@ public class UserService {
     public UserEntity findByEmail(final String email) {
         return userRepository.findFirstByEmail(email).orElseThrow(
                 () -> new UserNotFoundException("User with such login doesn't exist"));
+    }
+
+    public List<UserEntity> getUsers() {
+        return userRepository.findAll();
     }
 }

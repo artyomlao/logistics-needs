@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,9 @@ public class ProcurementService {
         final UserEntity userEntity = userRepository.findFirstByEmail(user.getUsername())
                 .orElseThrow(() -> new UserNotFoundException("User wasn't found"));
 
-        return procurementRepository.save(new ProcurementEntity().setUserId(userEntity.getId()));
+        return procurementRepository.save(new ProcurementEntity()
+                .setUserId(userEntity.getId())
+                .setPurchaseTime(LocalDateTime.now()));
     }
 
     public ProcurementEntity selectById(final Long id) {

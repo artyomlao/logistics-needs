@@ -8,6 +8,8 @@ import Homepage from "./Homepage";
 import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
 import ProcurementView from "./ProcurementView";
+import Registration from "./Registration";
+import AdminUsersPage from "./AdminUsersPage";
 import { useLocalState } from "./util/useLocalStorage";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -40,6 +42,14 @@ function App() {
         }
       />
       <Route
+        path="/users"
+        element={
+          <PrivateRoute>
+            <AdminUsersPage />
+          </PrivateRoute>
+        }>
+      </Route>
+      <Route
         path="/procurement/:id"
         element={
           <PrivateRoute>
@@ -48,6 +58,7 @@ function App() {
         }
       />
       <Route path="login" element={<Login />} />
+      <Route path="registration" element={<Registration />} />
       <Route path="/" element={<Homepage />} />
     </Routes>
   );

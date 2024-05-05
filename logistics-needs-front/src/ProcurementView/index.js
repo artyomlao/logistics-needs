@@ -73,6 +73,12 @@ const ProcurementView = () => {
     setSelectedOptions([...options, newOption]);
   };
 
+    const handleChange = (value, actionMeta) => {
+        let index = options.indexOf(actionMeta.removedValue);
+        options.splice(index, 1);
+        setSelectedOptions([...options])
+    };
+
   return (
     <Container className="mt-5">
       <Row className="d-flex align-items-center">
@@ -170,6 +176,7 @@ const ProcurementView = () => {
                 id="documents"
                 options={options}
                 isMulti
+                onChange={handleChange}
                 onCreateOption={handleCreate}
                 value={selectedOptions}
               />

@@ -24,18 +24,31 @@ const AdminDashboard = () => {
     }
   return (
     <Container>
-      <Row>
-        <Col>
-          <div
+      <Row className="justify-content-center">
+          <Col
+            md="8"
+            lg="6"
+            className="mt-2 d-flex flex-column gap-5 flex-md-row justify-content-md-between"
+          >
+          <Button
             className="d-flex justify-content-end"
-            style={{ cursor: "pointer" }}
+            variant="secondary"
+            onClick={() => {
+              window.location.href = "/users";
+            }}
+          >
+            Users
+          </Button>
+          <Button
+            className="d-flex justify-content-end"
+            variant="secondary"
             onClick={() => {
               setJwt(null);
               window.location.href = "/login";
             }}
           >
             Logout
-          </div>
+          </Button>
         </Col>
       </Row>
       <Row>

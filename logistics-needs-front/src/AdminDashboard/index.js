@@ -12,7 +12,6 @@ const AdminDashboard = () => {
   
     useEffect(() => {
       ajax("api/procurement", "GET", jwt).then((procurementData) => {
-        console.log(procurementData);
         setProcurement(procurementData);
       });
     }, [jwt]);

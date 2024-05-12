@@ -12,10 +12,16 @@ import Registration from "./Registration";
 import AdminUsersPage from "./AdminUsersPage";
 import { useLocalState } from "./util/useLocalStorage";
 import "bootstrap/dist/css/bootstrap.min.css";
+import TopNavbar from "./TopNavbar";
 
 function App() {
   const [jwt, setJwt] = useLocalState("", "jwt");
   const [role, setRole] = useState(getRolesFromJWT());
+
+    const handleLogout = () => {
+        setJwt(null);
+        window.location.href = "/login";
+    };
 
   function getRolesFromJWT() {
     if (jwt) {
@@ -32,10 +38,13 @@ function App() {
         element={
           role === "ADMIN" ? (
             <PrivateRoute>
+                    <TopNavbar handleLogout={handleLogout} />
+                    {/* Ваш остальной JSX здесь */}
               <AdminDashboard />
             </PrivateRoute>
           ) : (
             <PrivateRoute>
+                <TopNavbar handleLogout={handleLogout} />
               <Dashboard />
             </PrivateRoute>
           )

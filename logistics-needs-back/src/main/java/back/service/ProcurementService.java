@@ -75,6 +75,7 @@ public class ProcurementService {
                 .setDescription(model.getDescription())
                 .setPrice(model.getPrice())
                 .setQuantity(model.getQuantity())
+                .setStatus(model.getStatus())
                 .setDocuments(documentEntities));
     }
 }

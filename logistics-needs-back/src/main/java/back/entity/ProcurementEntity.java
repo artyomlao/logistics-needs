@@ -38,6 +38,9 @@ public class ProcurementEntity {
     @Column(name = "user_id")
     private Long userId;
 
+    @Column
+    private String status;
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore

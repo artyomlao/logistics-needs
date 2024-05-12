@@ -12,7 +12,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     ajax("api/procurement", "GET", jwt).then((procurementData) => {
-      console.log(procurementData);
       setProcurement(procurementData);
     });
   }, [jwt]);
@@ -22,75 +21,39 @@ const Dashboard = () => {
       navigate(`/procurement/${procurementData.id}`);
     })
   }
-  return (
-    <div style={{ margin: "2em" }}>
-      <Row>
-        <Col>
-          <div
-            className="d-flex justify-content-end"
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              setJwt(null);
-              window.location.href = "/login";
-            }}
-          >
-            Logout
-          </div>
-        </Col>
-      </Row>
-      <div className="mb-5">
-        <Button size="lg" onClick={() => createProcurement()}>
-          Submit New Procurement
-        </Button>
-      </div>
-      {procurement ? (
-        <div
-        className="d-grid gap-5"
-        style={{ gridTemplateColumns: "repeat(auto-fit, 18rem)" }}
-      >
-        {procurement.map((procurementData) => (
-          // <Col>
-          <Card
-            key={procurementData.id}
-            style={{ width: "20rem", height: "18rem" }}
-          >
-            <Card.Body className="d-flex flex-column justify-content-around">
-            <Card.Title>Procurement #{procurementData.id}</Card.Title>
-              <Card.Text style={{ marginTop: "1em" }}>
-                <p>
-                  <b>Name</b>: {procurementData.name}
-                </p>
-                <p>
-                  <b>Description</b>: {procurementData.description}
-                </p>
-                <p>
-                  <b>Price</b>: {procurementData.price}
-                </p>
-                <p>
-                  <b>Quantity</b>: {procurementData.quantity}
-                </p>
-                <p>
-                  <b>Purchase time</b>: {procurementData.purchaseTime}
-                </p>
-              </Card.Text>
 
-              <Button
-                variant="secondary"
-                onClick={() => {
-                  window.location.href = `/procurement/${procurementData.id}`;
-                }}
-              >
-                Edit
-              </Button>
-            </Card.Body>
-          </Card>
-          // </Col>
-        ))}
+  return (
+      <div className="procurement-dashboard">
+        <div className="mb-5">
+          <Button size="lg" className="submit-btn" onClick={() => createProcurement()}>
+            Submit New Procurement
+          </Button>
+        </div>
+        {procurement ? (
+            <div className="d-grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fit, 18rem)" }}>
+              {procurement.map((procurementData) => (
+                  <Card key={procurementData.id} className="procurement-card">
+                    <Card.Body className="procurement-details">
+                      <Card.Title className="text-light">Procurement #{procurementData.id}</Card.Title>
+                      <Card.Text className="card-text">
+                        <p className="text-light"><b className="text-light">Name</b>: {procurementData.name}</p>
+                        <p className="text-light"><b className="text-light">Description</b>: {procurementData.description}</p>
+                        <p className="text-light"><b className="text-light">Price</b>: {procurementData.price}</p>
+                        <p className="text-light"><b className="text-light">Status</b>: {procurementData.status}</p>
+                        <p className="text-light"><b className="text-light">Quantity</b>: {procurementData.quantity}</p>
+                        <p className="text-light"><b className="text-light">Purchase time</b>: {procurementData.purchaseTime}</p>
+                      </Card.Text>
+                      <Button variant="secondary" className="edit-btn bg-light text-dark" onClick={() => { window.location.href = `/procurement/${procurementData.id}`; }}>
+                        Edit
+                      </Button>
+                    </Card.Body>
+                  </Card>
+              ))}
+            </div>
+        ) : (
+            <></>
+        )}
       </div>
-      ) : (
-        <></>
-      )}
-    </div>
   );
 };
 

@@ -44,3 +44,96 @@
   border-radius: 1em;
   margin-top: 2em;
 }
+
+html {
+  height: 100vh;
+}
+
+body {
+   /* Gradient background with soft bright colors */
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+/* Style for the procurement dashboard */
+.procurement-dashboard {
+  height: 100vh;
+  background-color: #f8f9fa; /* Fallback color */
+  background-image: linear-gradient(to bottom right, #ffcb70, #ffcb70);
+  padding: 2em;/* Soft shadow */
+}
+
+/* Style for the logout button */
+.logout-btn {
+  cursor: pointer;
+  text-align: right;
+  color: #ff6b6b; /* Red color */
+}
+
+.logout-btn:hover {
+  text-decoration: underline;
+}
+
+/* Style for the "Submit New Procurement" button */
+.submit-btn {
+  margin-bottom: 2em;
+  background-color: #45aaf2; /* Blue color */
+  border-color: #45aaf2;
+}
+
+.submit-btn:hover {
+  background-color: #2c97e4; /* Darker shade of blue */
+}
+
+/* Style for the procurement cards */
+.procurement-card {
+  width: 20rem;
+  height: auto;
+  background-color: #fdcb6e; /* Yellow color */
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  margin-bottom: 1.5em;
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.procurement-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Style for procurement details */
+.procurement-details {
+  background-color: #c350ff;
+  padding: 1em;
+}
+
+.procurement-details p {
+  margin-bottom: 0.5em;
+}
+
+.procurement-details p b {
+  color: #2d3436; /* Dark gray color */
+}
+
+/* Style for the "Edit" button */
+.edit-btn {
+  width: 100%;
+  background-color: #4b7bec; /* Purple color */
+  color: #ffffff; /* White text color */
+  border: none;
+  border-radius: 0 0 10px 10px;
+  transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+  background-color: #3867d6; /* Darker shade of purple */
+}
+
+.background-clr {
+  background-color: #cc943d;
+}
+
+.break-bootstrap-container {
+  display: inline-block;
+  flex-grow: unset !important;
+}

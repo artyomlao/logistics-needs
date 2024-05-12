@@ -19,6 +19,7 @@ public class ProcurementModel {
     private Long quantity;
     private Double price;
     private LocalDateTime purchaseTime;
+    private String status;
     private List<String> documents;
     private Long userId;
 }
